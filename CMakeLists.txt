@@ -1,7 +1,8 @@
 
 cmake_minimum_required(VERSION 3.0)
 project (restc-cpp)
-
+include(conanbuildinfo.cmake)
+conan_basic_setup()
 if (NOT DEFINED RESTC_ROOT_DIR)
     set(RESTC_ROOT_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 endif()
@@ -44,8 +45,8 @@ if (NOT EMBEDDED_RESTC_CPP)
 
     if (NOT CMAKE_PREFIX_PATH AND WIN32 AND RESTC_CPP_USE_WIN32_DEFAULTS)
         set(CMAKE_PREFIX_PATH
-            C:/devel/zlib-1.2.9
-            C:/devel/zlib-1.2.9/build/RelWithDebInfo
+            C:/Users/sunri/.conan/data/zlib/1.2.8/lasote/stable/source/zlib-1.2.8
+            C:/Users/sunri/.conan/data/zlib/1.2.8/lasote/stable/source/zlib-1.2.8/build/RelWithDebInfo
         )
     endif()
 
@@ -62,16 +63,8 @@ if (NOT EMBEDDED_RESTC_CPP)
         # is a major pain-point. I'm planning to see if I can use Windows crypto
         # library in sted of openssl, (or somerthing that can be built as a
         # submodule to git with cmake)).
-        set(OPENSSL_ROOT_DIR C:/devel/openssl)
+        set(OPENSSL_ROOT_DIR C:/Users/sunri/.conan/data/OpenSSL/1.0.2k/lasote/stable/package/ee5dab950b6ea94ae953b93c55343e98c2ec39df)
         message(STATUS "Setting OPENSSL_ROOT_DIR to ${OPENSSL_ROOT_DIR}")
-    endif()
-
-    if (RESTC_CPP_WITH_ZLIB)
-        find_package(ZLIB REQUIRED)
-    endif()
-
-    if (RESTC_CPP_WITH_TLS)
-        find_package(OpenSSL REQUIRED)
     endif()
 
     if (UNIX)
@@ -85,7 +78,7 @@ if (NOT EMBEDDED_RESTC_CPP)
         ${ZLIB_LIBRARIES}
     )
 
-    include(${RESTC_ROOT_DIR}/cmake_scripts/boost.cmake)
+    
     include(cmake_scripts/pch.cmake)
 
     if (UNIX)

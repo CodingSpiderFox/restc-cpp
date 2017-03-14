@@ -1,0 +1,8 @@
+[requires]
+Boost/1.63.0@windoze/stable
+OpenSSL/1.0.2k@lasote/stable
+zlib/1.2.8@lasote/stable
+
+[generators]
+visual_studio
+cmake
